@@ -1,0 +1,47 @@
+<div class="jumbotron header-bg"> 
+    <h1>Eat-Da-Burger</h1>
+		<img class="mb-3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUdStyT_YYUuZTArUh18MGDMyRM20Agt46VCND7IzY3wobW3_iOQ">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <h2 class="header">Burgers to Devour</h2>
+            {{#each burgers}}
+                {{#unless this.devoured}}
+                    <form action="/burgers/update/{{this.id}}?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <ul>
+                                <li>
+                                    <button type="submit" name="devoured" value="1" class="btn">{{burger_name}}</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                {{/unless}}
+            {{/each}}
+        </div>
+        <div class="col-lg-4 text-center">
+            
+            <form action="/burgers/create" method="POST">
+                <div class="form-group">
+                    <input type="text" name="burger_name" class="form-control text-center" maxlength="50" placeholder="Enter Burger Name">
+                    <button class="btn btn-block my-2" type="submit">Add Burger</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+            <h2 class="header">Burgers Devoured</h2>
+            {{#each burgers}}
+                {{#if this.devoured}}
+                    <div>
+                        <ul>
+                            <li>
+                                <button disabled class="btn">{{burger_name}}</button>
+                            </li>
+                        </ul>
+                    </div>
+                {{/if}}
+            {{/each}}
+        </div>
+    </div>
+</div>
